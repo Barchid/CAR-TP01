@@ -1,0 +1,103 @@
+package ftp;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+
+import ftp.controls.FtpControl;
+import ftp.controls.FtpControlFactory;
+
+/**
+ * @author Sami BARCHID
+ *
+ */
+public class FtpCommunication implements Runnable {
+	private Socket client;
+	private Map<String, FtpControl> controls;
+
+	/**
+	 * @param client
+	 */
+	public FtpCommunication(Socket client) {
+		super();
+		this.client = client;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Thread#run()
+	 */
+	@Override
+	public void run() {
+		try (BufferedWriter controlOut = new BufferedWriter(
+				new OutputStreamWriter(this.client.getOutputStream(), StandardCharsets.UTF_8));
+				BufferedReader controlIn = new BufferedReader(
+						new InputStreamReader(this.client.getInputStream(), StandardCharsets.UTF_8));) {
+
+			FtpControlChannel controlChannel = new FtpControlChannel(controlOut, controlIn);
+			this.initControls();
+
+			System.out.println("Sending welcome message>");
+			this.sendWelcomeMessage(controlChannel);
+
+			boolean isRunning = true;
+			while (isRunning) {
+				// Waits for a command
+				FtpCommand command = controlChannel.readCommand();
+				FtpReply reply = this.executeCommand(command);
+				controlChannel.sendReply(reply);
+
+				if (command.getMessage().equals("QUIT")) { // quit command finishes the loop
+					isRunning = false;
+				}
+			}
+
+			// closing the client.
+			this.client.close();
+		} catch (IOException ex) {
+			System.out.println(ex.getMessage());
+			System.out.println("Error while receiving command/sending reply. Connection abort.");
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			System.out.println("Unknown error. Connection abort.");
+		}
+	}
+
+	/**
+	 * Initializes the dictionary of all the known FTP command controllers of the
+	 * server.
+	 * 
+	 */
+	private void initControls() {
+		SessionStore store = new SessionStore();
+		this.controls = FtpControlFactory.INSTANCE.getControlsMap(store);
+	}
+
+	/**
+	 * Executes the specified FTP command with the right controller and returns the
+	 * FTP reply that is the result from the controller's handling.
+	 * 
+	 * @param command the FTP commmand to process.
+	 * @throws IOException when a reply could not be sent.
+	 * @return FtpReply the FTP reply that results from the controller's handling.
+	 */
+	private FtpReply executeCommand(FtpCommand command) throws IOException {
+		FtpControl control = this.controls.get(command.getMessage());
+		if (control == null) { // No controller available for the specified FTP command
+			return this.controls.get("Unknown").handle(command);
+		} else {
+			return control.handle(command);
+		}
+	}
+
+	private void sendWelcomeMessage(FtpControlChannel controlChannel) throws IOException {
+		String welcome = "WESH ALORS !";
+		controlChannel.sendReply(new FtpReply(2, 2, 0, welcome));
+	}
+}
