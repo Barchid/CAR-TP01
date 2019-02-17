@@ -15,6 +15,24 @@ public class SessionStore {
 	private InetSocketAddress activeAdr;
 	private int passivePort;
 	private int transferType;
+	private AppConfig appConfig;
+	private String rootDirectory;
+
+	private String currentDirectory;
+
+	/**
+	 * @return the appConfig
+	 */
+	public AppConfig getAppConfig() {
+		return appConfig;
+	}
+
+	/**
+	 * @param appConfig the appConfig to set
+	 */
+	public void setAppConfig(AppConfig appConfig) {
+		this.appConfig = appConfig;
+	}
 
 	/**
 	 * @param loggedIn
@@ -27,6 +45,8 @@ public class SessionStore {
 		this.username = username;
 		this.password = password;
 		this.activeAdr = null;
+		this.rootDirectory = null;
+		this.currentDirectory = null;
 		this.passivePort = -1;
 		this.transferType = TYPE_ASCII;
 	}
@@ -125,5 +145,33 @@ public class SessionStore {
 		}
 
 		this.transferType = transferType;
+	}
+
+	/**
+	 * @return the rootDirectory
+	 */
+	public String getRootDirectory() {
+		return rootDirectory;
+	}
+
+	/**
+	 * @param rootDirectory the rootDirectory to set
+	 */
+	public void setRootDirectory(String rootDirectory) {
+		this.rootDirectory = rootDirectory;
+	}
+
+	/**
+	 * @return the currentDirectory
+	 */
+	public String getCurrentDirectory() {
+		return currentDirectory;
+	}
+
+	/**
+	 * @param currentDirectory the currentDirectory to set
+	 */
+	public void setCurrentDirectory(String currentDirectory) {
+		this.currentDirectory = currentDirectory;
 	}
 }

@@ -35,6 +35,10 @@ public class FtpControlChannel {
 
 	public FtpCommand readCommand() throws IOException {
 		String line = this.reader.readLine();
+		if (line == null) {
+			return null;
+		}
+
 		String[] words = line.split(" ");
 		if (words.length > 1) {
 			System.out.println("Command received : " + words[0] + " " + words[1]);

@@ -19,13 +19,15 @@ import ftp.controls.FtpControlFactory;
 public class FtpCommunication implements Runnable {
 	private Socket client;
 	private Map<String, FtpControl> controls;
+	private AppConfig appConfig;
 
 	/**
 	 * @param client
 	 */
-	public FtpCommunication(Socket client) {
+	public FtpCommunication(Socket client, AppConfig appConfig) {
 		super();
 		this.client = client;
+		this.appConfig = appConfig;
 	}
 
 	/*
@@ -41,7 +43,7 @@ public class FtpCommunication implements Runnable {
 						new InputStreamReader(this.client.getInputStream(), StandardCharsets.UTF_8));) {
 
 			FtpControlChannel controlChannel = new FtpControlChannel(controlOut, controlIn);
-			this.initControls();
+			this.initControls(controlChannel);
 
 			System.out.println("Sending welcome message>");
 			this.sendWelcomeMessage(controlChannel);
@@ -50,6 +52,9 @@ public class FtpCommunication implements Runnable {
 			while (isRunning) {
 				// Waits for a command
 				FtpCommand command = controlChannel.readCommand();
+				if (command == null) {
+					continue;
+				}
 				FtpReply reply = this.executeCommand(command);
 				controlChannel.sendReply(reply);
 
@@ -64,6 +69,7 @@ public class FtpCommunication implements Runnable {
 			System.out.println(ex.getMessage());
 			System.out.println("Error while receiving command/sending reply. Connection abort.");
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			System.out.println(ex.getMessage());
 			System.out.println("Unknown error. Connection abort.");
 		}
@@ -73,10 +79,14 @@ public class FtpCommunication implements Runnable {
 	 * Initializes the dictionary of all the known FTP command controllers of the
 	 * server.
 	 * 
+	 * @param controlChannel the ftp control channel (used with the data channel
+	 *                       constructor)
 	 */
-	private void initControls() {
+	private void initControls(FtpControlChannel controlChannel) {
 		SessionStore store = new SessionStore();
-		this.controls = FtpControlFactory.INSTANCE.getControlsMap(store);
+		store.setAppConfig(this.appConfig);
+		FtpDataChannel dataChannel = new FtpDataChannel(store, controlChannel);
+		this.controls = FtpControlFactory.INSTANCE.getControlsMap(store, dataChannel);
 	}
 
 	/**

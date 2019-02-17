@@ -9,8 +9,8 @@ import ftp.SessionStore;
  * @author Sami BARCHID
  *
  */
-public class FtpDataControl extends FtpControl {
-	private FtpDataChannel dataChannel;
+public abstract class FtpDataControl extends FtpControl {
+	protected FtpDataChannel dataChannel;
 
 	/**
 	 * @param store
@@ -19,16 +19,4 @@ public class FtpDataControl extends FtpControl {
 		super(store);
 		this.dataChannel = dataChannel;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ftp.controls.FtpControl#handle(ftp.FtpCommand)
-	 */
-	@Override
-	public FtpReply handle(FtpCommand command) {
-
-		return null;
-	}
-
 }

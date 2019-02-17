@@ -1,5 +1,7 @@
 package ftp.controls;
 
+import java.io.IOException;
+
 import ftp.FtpCommand;
 import ftp.FtpReply;
 import ftp.SessionStore;
@@ -25,6 +27,7 @@ public abstract class FtpControl {
 	 * 
 	 * @param command the command to handle
 	 * @return FtpReply the adequate reply.
+	 * @throws IOException
 	 */
-	public abstract FtpReply handle(FtpCommand command);
+	public abstract FtpReply handle(FtpCommand command) throws IOException;
 }

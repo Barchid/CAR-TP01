@@ -87,7 +87,7 @@ public class FtpPasvControl extends FtpControl {
 	private String createAdr(int port) {
 		try {
 			String ip = Inet4Address.getLocalHost().getHostAddress();
-			String[] nums = ip.split(".");
+			String[] nums = ip.split("\\.");
 			int port1 = port / 256;
 			int port2 = port - port1;
 			return "(" + nums[0] + "," + nums[1] + "," + nums[2] + "," + nums[3] + "," + port1 + "," + port2 + ")";

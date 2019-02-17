@@ -73,7 +73,10 @@ public class FtpPortControl extends FtpControl {
 			int portNum2 = Integer.parseInt(args[5]);
 			int port = portNum1 * 256 + portNum2;
 
+			System.out.println("Required port is " + port);
+
 			if (!this.isPortValidAndAvailable(port)) {
+				System.out.println("Error : port number " + port + " is not available. Client must try again.");
 				return null;
 			}
 
@@ -95,14 +98,15 @@ public class FtpPortControl extends FtpControl {
 	 */
 	public boolean isPortValidAndAvailable(int port) {
 		if (port < 1024 || port > 65535) {
+			System.out.println("Port is out of range.");
 			return false;
 		}
 
-		try (ServerSocket ss = new ServerSocket(port)) {
-			ss.setReuseAddress(true);
-			return true;
-		} catch (IOException e) {
-			return false;
-		}
+//		try (ServerSocket ss = new ServerSocket(port)) {
+//		} catch (IOException e) {
+//			System.out.println("Another process use this port.");
+//			return false;
+//		}
+		return true;
 	}
 }
