@@ -3,7 +3,9 @@ package ftp;
 import java.net.InetSocketAddress;
 
 /**
- * @author Sami BARCHID Represents the state of the client's session.
+ * @author Sami BARCHID Represents the state of the client's session. This is
+ *         basically a POJO injected in all control objects that will be read
+ *         and modified by them.
  */
 public class SessionStore {
 	public static final int TYPE_ASCII = 1;
@@ -17,22 +19,8 @@ public class SessionStore {
 	private int transferType;
 	private AppConfig appConfig;
 	private String rootDirectory;
-
 	private String currentDirectory;
-
-	/**
-	 * @return the appConfig
-	 */
-	public AppConfig getAppConfig() {
-		return appConfig;
-	}
-
-	/**
-	 * @param appConfig the appConfig to set
-	 */
-	public void setAppConfig(AppConfig appConfig) {
-		this.appConfig = appConfig;
-	}
+	private String renameFrom;
 
 	/**
 	 * @param loggedIn
@@ -49,6 +37,7 @@ public class SessionStore {
 		this.currentDirectory = null;
 		this.passivePort = -1;
 		this.transferType = TYPE_ASCII;
+		this.renameFrom = null;
 	}
 
 	/**
@@ -173,5 +162,33 @@ public class SessionStore {
 	 */
 	public void setCurrentDirectory(String currentDirectory) {
 		this.currentDirectory = currentDirectory;
+	}
+
+	/**
+	 * @return the appConfig
+	 */
+	public AppConfig getAppConfig() {
+		return appConfig;
+	}
+
+	/**
+	 * @param appConfig the appConfig to set
+	 */
+	public void setAppConfig(AppConfig appConfig) {
+		this.appConfig = appConfig;
+	}
+
+	/**
+	 * @return the renameFrom
+	 */
+	public String getRenameFrom() {
+		return renameFrom;
+	}
+
+	/**
+	 * @param renameFrom the renameFrom to set
+	 */
+	public void setRenameFrom(String renameFrom) {
+		this.renameFrom = renameFrom;
 	}
 }

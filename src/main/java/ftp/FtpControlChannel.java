@@ -41,8 +41,14 @@ public class FtpControlChannel {
 
 		String[] words = line.split(" ");
 		if (words.length > 1) {
-			System.out.println("Command received : " + words[0] + " " + words[1]);
-			return new FtpCommand(words[0], words[1]);
+			// link all the params together (starting with index 1)
+			String param = words[1];
+			for (int i = 2; i < words.length; i++) {
+				param += " " + words[i];
+			}
+
+			System.out.println("Command received : " + words[0] + " " + param);
+			return new FtpCommand(words[0], param);
 		} else {
 			System.out.println("Command received : " + words[0]);
 			return new FtpCommand(words[0]);

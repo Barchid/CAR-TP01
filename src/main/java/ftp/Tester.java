@@ -49,49 +49,19 @@ public class Tester {
 			send("TYPE I", writer);
 			System.out.println(read(reader));
 
-			send("LIST", writer);
-			String ls = read(reader);
-			System.out.println(ls);
+//			send("RETR /Javascript", writer);
+//			String ls = read(reader);
+//			System.out.println(ls);
 
-			ServerSocket dataChannel = new ServerSocket(45 * 256 + 21);
-			Socket dataTransfer = dataChannel.accept();
-			BufferedInputStream dataReader = new BufferedInputStream(dataTransfer.getInputStream());
-			String data = read(dataReader);
-			System.out.println(data);
+//			ServerSocket dataChannel = new ServerSocket(45 * 256 + 21);
+//			Socket dataTransfer = dataChannel.accept();
+//			BufferedInputStream dataReader = new BufferedInputStream(dataTransfer.getInputStream());
+//			String data = read(dataReader);
+//			System.out.println(data);
+//			System.out.println(read(reader));
+
+			send("MKD", writer);
 			System.out.println(read(reader));
-
-			send("CWD /SQL/sql_exercices.sql", writer);
-			System.out.println(read(reader));
-
-			File dir = new File("sami/rdf-semaine-1-moments");
-			for (File son : dir.listFiles()) {
-				StringBuilder sb = new StringBuilder();
-				if (son.isDirectory()) {
-					sb.append("d");
-				} else {
-					sb.append("-");
-				}
-				String perms = "";
-				perms += son.canRead() ? "r" : "-";
-				perms += son.canWrite() ? "w" : "-";
-				perms += son.canExecute() ? "x" : "-";
-
-				sb.append(perms);
-				sb.append(perms);
-				sb.append(perms);
-
-				sb.append(" 1 ftp ftp         ");
-				sb.append(son.length());
-				sb.append(" ");
-				SimpleDateFormat format = new SimpleDateFormat("MMM dd yyyy", Locale.ENGLISH);
-				sb.append(format.format(son.lastModified()));
-				sb.append(" ");
-				sb.append(son.getName());
-				sb.append("\r\n");
-				System.out.print(sb.toString());
-			}
-			String lol = Unix4j.ls(Ls.Options.l.h, dir).toStringResult();
-			System.out.println(lol);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());

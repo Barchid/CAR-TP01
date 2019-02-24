@@ -33,6 +33,12 @@ public enum FtpControlFactory {
 		controls.put("PWD", new FtpPwdControl(store));
 		controls.put("CDUP", new FtpCdupControl(store));
 		controls.put("CWD", new FtpCwdControl(store));
+		controls.put("RETR", new FtpRetrDataControl(store, dataChannel));
+		controls.put("RNFR", new FtpRnfrControl(store));
+		controls.put("RNTO", new FtpRntoControl(store));
+		controls.put("DELE", new FtpDeleControl(store));
+		controls.put("RMD", new FtpRmdControl(store));
+		controls.put("MKD", new FtpMkdControl(store));
 		return controls;
 	}
 }

@@ -52,7 +52,11 @@ public class FtpCommunication implements Runnable {
 			while (isRunning) {
 				// Waits for a command
 				FtpCommand command = controlChannel.readCommand();
+
+				// if nothing read in the control channel, then the communication is ended
 				if (command == null) {
+					System.out.println("Communication ended by the client. Connection abort.");
+					isRunning = false;
 					continue;
 				}
 				FtpReply reply = this.executeCommand(command);

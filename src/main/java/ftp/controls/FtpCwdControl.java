@@ -3,6 +3,8 @@ package ftp.controls;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
 import ftp.FtpCommand;
@@ -41,15 +43,10 @@ public class FtpCwdControl extends FtpControl {
 					"Broken client detected, missing argument to CWD. \"/\" is current directory.");
 		}
 
-		// remove the "/" if it is the first char in the dir name
-		if (dirName.charAt(0) == '/') {
-			dirName = dirName.substring(1);
-		}
-
-		File newCurrentDir = this.findSubDirectory(dirName);
+		File newCurrentDir = this.findDirectory(dirName);
 
 		if (newCurrentDir == null) {
-			return new FtpReply(5, 5, 0, "CWD failed. \"/" + command.getArg() + "\" : directory not found.");
+			return new FtpReply(5, 5, 0, "CWD failed. \"" + command.getArg() + "\" : directory not found.");
 		}
 
 		this.store.setCurrentDirectory(newCurrentDir.getAbsolutePath());
@@ -61,31 +58,27 @@ public class FtpCwdControl extends FtpControl {
 	}
 
 	/**
-	 * Finds the subdirectory of the current directory that has the name defined in
-	 * parameter.
+	 * Finds the directory located as a child or sub-child of the root directory of
+	 * the FTP client.
 	 * 
-	 * @param subDirName the name of the sub directory to find
-	 * @return the subdirectory to find.
+	 * @param dirName the directory name that is required.
+	 * @return the directory found or null if the directory does not exist.
 	 */
-	private File findSubDirectory(String subDirName) {
-		File currentDir = new File(this.store.getCurrentDirectory());
-
-		// gets all the sub directory of the current dir
-		File[] subDirs = currentDir.listFiles(new FileFilter() {
-
-			@Override
-			public boolean accept(File pathname) {
-				return pathname.isDirectory();
-			}
-		});
-
-		for (File subDir : subDirs) {
-			if (subDir.getName().equals(subDirName)) {
-				return subDir;
-			}
+	private File findDirectory(String dirName) {
+		// remove the first "/" that can be sent (not useful here)
+		if (dirName.charAt(0) == '/') {
+			dirName = dirName.substring(1);
 		}
 
-		return null;
+		// in windows implementation, the path can contain a \, so we have to kill it
+		if (dirName.length() != 0 && dirName.charAt(0) == '\\') {
+			dirName = dirName.substring(1);
+		}
+		try {
+			File directory = Paths.get(this.store.getRootDirectory(), dirName).toFile();
+			return directory;
+		} catch (InvalidPathException ex) {
+			return null;
+		}
 	}
-
 }

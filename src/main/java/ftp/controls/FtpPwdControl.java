@@ -32,6 +32,9 @@ public class FtpPwdControl extends FtpControl {
 
 		// the path to display to the FTP client must be "/" instead of the root
 		// directory.
+		if (this.store.getCurrentDirectory().charAt(0) == '\\') {
+			this.store.setCurrentDirectory(this.store.getCurrentDirectory().substring(1));
+		}
 		String displayDir = this.store.getCurrentDirectory().replaceFirst(Pattern.quote(this.store.getRootDirectory()),
 				"/");
 

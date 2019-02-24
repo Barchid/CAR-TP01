@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -34,7 +35,8 @@ public class FtpDataChannel {
 		this.sendOpeningReply();
 		try (Socket socket = new Socket(this.store.getActiveAdr().getAddress(), this.store.getActiveAdr().getPort());) {
 			System.out.println("Writing ASCII data through data channel.");
-			this.writeASCIIData(data, socket);
+//			this.writeASCIIData(data, socket);
+			this.writeImageData(data.getBytes(), socket);
 		} catch (IOException exception) {
 			System.err.println("Could not open connection data. Send error to the control channel.");
 			this.sendFailureReply();
@@ -49,7 +51,8 @@ public class FtpDataChannel {
 			this.sendOpeningReply();
 
 			System.out.println("Writing data through data channel.");
-			this.writeASCIIData(data, socket);
+//			this.writeASCIIData(data, socket);
+			this.writeImageData(data.getBytes(), socket);
 		} catch (SocketTimeoutException e) {
 			System.out.println("Timeout of the socket reached. Send error in the control channel.");
 			this.sendTimeoutReply();
@@ -183,14 +186,17 @@ public class FtpDataChannel {
 	}
 
 	/**
+	 * Writes the binary data though the data channel connection with the client.
 	 * 
-	 * @param imageData
-	 * @param socket
+	 * @param imageData the data to write to the client.
+	 * @param socket    the socket representing the data channel between the server
+	 *                  and the client.
 	 * @throws IOException
 	 */
 	private void writeImageData(byte[] imageData, Socket socket) throws IOException {
-		try (BufferedOutputStream dataOut = new BufferedOutputStream(socket.getOutputStream())) {
+		try (DataOutputStream dataOut = new DataOutputStream(socket.getOutputStream())) {
 			dataOut.write(imageData);
+			dataOut.flush();
 		}
 	}
 

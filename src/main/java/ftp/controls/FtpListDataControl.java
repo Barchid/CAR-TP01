@@ -96,6 +96,7 @@ public class FtpListDataControl extends FtpDataControl {
 			sb.append(son.getName());
 			sb.append("\r\n");
 		}
+		System.out.println(sb.toString());
 		return sb.toString();
 	}
 }

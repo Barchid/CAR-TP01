@@ -16,15 +16,14 @@ public class App {
 		System.out.println("Initializing server on port : " + appConfig.getPortNumber() + "...");
 		try (ServerSocket server = new ServerSocket(appConfig.getPortNumber())) {
 			System.out.println("Creating thread pool...");
-			// Use threadpool with a number of the available processors in the runtime.
-			ExecutorService executor = Executors.newFixedThreadPool(10);
 
 			System.out.println("Waiting for clients...");
 			while (true) {
 				Socket client = server.accept();
 				System.out.println("Client connection received from " + client.getInetAddress().toString());
 				Runnable worker = new FtpCommunication(client, appConfig);
-				executor.execute(worker);
+				new Thread(worker).start();
+				System.out.println("Worker for client of ip (" + client.getInetAddress().getHostAddress() + ") ended.");
 			}
 		} catch (IOException e) {
 			System.err.println("Cannot start FTP server : port number already used.");
