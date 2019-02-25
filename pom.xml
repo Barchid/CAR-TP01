@@ -49,7 +49,7 @@
             <configuration>
                <archive>
                   <manifest>
-                     <mainClass>ftp.App</mainClass>
+                     <mainClass>ftp.Main</mainClass>
                   </manifest>
                </archive>
             </configuration>

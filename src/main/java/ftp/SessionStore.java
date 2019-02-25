@@ -3,9 +3,11 @@ package ftp;
 import java.net.InetSocketAddress;
 
 /**
- * @author Sami BARCHID Represents the state of the client's session. This is
- *         basically a POJO injected in all control objects that will be read
- *         and modified by them.
+ * @author Sami BARCHID
+ * 
+ *         Represents the state of the client's session. This is basically a
+ *         POJO injected in all control objects that will be read and modified
+ *         by them.
  */
 public class SessionStore {
 	public static final int TYPE_ASCII = 1;

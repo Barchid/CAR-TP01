@@ -5,7 +5,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 /**
- * @author Sami BARCHID Represents the control channel of an FTP communication.
+ * @author Sami BARCHID
+ * 
+ *         Represents the control channel of an FTP communication.
  */
 public class FtpControlChannel {
 	private BufferedWriter writer;

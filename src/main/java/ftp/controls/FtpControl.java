@@ -8,7 +8,10 @@ import ftp.SessionStore;
 
 /**
  * @author Sami BARCHID
- *
+ * 
+ *         Abstract class implemented by every class in the package. It
+ *         represents the basic algorithm of a controller that handles an FTP
+ *         command. This class is the base of a simplified strategy pattern.
  */
 public abstract class FtpControl {
 	protected SessionStore store;

@@ -14,7 +14,9 @@ import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author Sami BARCHID Represents the data channel of an Ftp communication
+ * @author Sami BARCHID
+ * 
+ *         Represents the data channel of an Ftp communication
  */
 public class FtpDataChannel {
 	private SessionStore store;

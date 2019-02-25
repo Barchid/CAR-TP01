@@ -13,9 +13,11 @@ import ftp.controls.FtpControl;
 import ftp.controls.FtpControlFactory;
 
 /**
- * @author Sami BARCHID Represents the communication session with an FTP client.
- *         This is basically the thread that will be executed when the server
- *         receives a new client socket.
+ * @author Sami BARCHID
+ * 
+ *         Represents the communication session with an FTP client. This is
+ *         basically the thread that will be executed when the server receives a
+ *         new client socket.
  */
 public class FtpCommunication implements Runnable {
 	private Socket client;

@@ -10,6 +10,8 @@ import ftp.SessionStore;
 
 /**
  * @author Sami BARCHID
+ * 
+ *         Represents the CDUP FTP command.
  *
  */
 public class FtpCdupControl extends FtpControl {

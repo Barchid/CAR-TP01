@@ -9,8 +9,10 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * @author Sami BARCHID Represents the configurations of the application. This
- *         class will load the "config.properties" to load the configurations.
+ * @author Sami BARCHID
+ * 
+ *         Represents the configurations of the application. This class will
+ *         load the "config.properties" to load the configurations.
  */
 public class AppConfig {
 	private int portNumber;

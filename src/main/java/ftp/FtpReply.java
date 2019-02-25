@@ -2,7 +2,12 @@ package ftp;
 
 /**
  * @author Sami BARCHID
- * Represents an FTP reply sent by the server when 
+ * 
+ *         Represents an FTP reply sent by the server after a command of the
+ *         client. An FTP reply is composed by the a three digit code and an
+ *         additionnal message. For example :
+ * 
+ *         "550 network error"
  */
 public class FtpReply {
 	private String code;

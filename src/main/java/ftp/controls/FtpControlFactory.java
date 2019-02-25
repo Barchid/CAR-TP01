@@ -8,11 +8,24 @@ import ftp.SessionStore;
 
 /**
  * @author Sami BARCHID
+ * 
+ *         Factory pattern used to create every controller instance of the
+ *         available FTP commands in the server.
  *
  */
 public enum FtpControlFactory {
 	INSTANCE;
 
+	/**
+	 * Creates every instances of the FTP controllers for the available FTP commands
+	 * in the server and pack them into a Map object
+	 * 
+	 * @param store       the session store singleton that is shared between every
+	 *                    instances of controller.
+	 * @param dataChannel the data channel singleton used by the controllers that
+	 *                    need to create a data connection with the client.
+	 * @return the map of all the commands code linked by their controller instance.
+	 */
 	public Map<String, FtpControl> getControlsMap(SessionStore store, FtpDataChannel dataChannel) {
 		Map<String, FtpControl> controls = new HashMap<String, FtpControl>();
 

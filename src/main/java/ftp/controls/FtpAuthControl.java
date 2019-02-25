@@ -6,6 +6,9 @@ import ftp.SessionStore;
 
 /**
  * @author Sami BARCHID
+ * 
+ *         Represents the FTP AUTH command (that is not supported by the server,
+ *         so it will send a 502 error)
  *
  */
 public class FtpAuthControl extends FtpControl {
