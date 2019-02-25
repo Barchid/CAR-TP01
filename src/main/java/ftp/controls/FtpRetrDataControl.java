@@ -37,7 +37,7 @@ public class FtpRetrDataControl extends FtpDataControl {
 
 		String fileName = command.getArg();
 		if (fileName == null) {
-			return new FtpReply(5, 0, 0, "De la merde");
+			return new FtpReply(5, 0, 1, "Syntax error");
 		}
 
 		if (fileName.charAt(0) == '/') {
@@ -46,7 +46,7 @@ public class FtpRetrDataControl extends FtpDataControl {
 
 		File file = this.findFile(fileName);
 		if (file == null) {
-			return new FtpReply(5, 0, 0, "De la merde");
+			return new FtpReply(5, 0, 0, "File cannot be sent");
 		}
 
 		this.sendFile(file);

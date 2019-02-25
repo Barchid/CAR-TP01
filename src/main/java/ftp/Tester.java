@@ -49,6 +49,9 @@ public class Tester {
 			send("TYPE I", writer);
 			System.out.println(read(reader));
 
+			send("STOR XML", writer);
+			System.out.println(read(reader));
+
 //			send("RETR /Javascript", writer);
 //			String ls = read(reader);
 //			System.out.println(ls);

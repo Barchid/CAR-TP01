@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import ftp.FtpCommand;
 import ftp.FtpDataChannel;
@@ -56,15 +57,48 @@ public class FtpStorDataControl extends FtpDataControl {
 
 		try {
 			Path path = Paths.get(parentPath, toStorPath);
-			System.out.println("Path of file to delete is : " + path.toString());
-			if (!Files.exists(path)) {
-				return new FtpReply(5, 5, 0, "File not found.");
-			} else if (Files.isDirectory(path)) {
-				return new FtpReply(5, 5, 0, "Directory found.");
-			} else {
-				Files.delete(path);
-				return new FtpReply(2, 5, 0, "File deleted successfully.");
+			System.out.println("Path of file to store is : " + path.toString());
+
+			if (Files.isDirectory(path)) {
+				return new FtpReply(5, 5, 0, "Filename invalid");
 			}
+
+			if (this.store.getTransferType() == SessionStore.TYPE_ASCII) {
+				if (this.store.getActiveAdr() != null) {
+					String data = this.dataChannel.readASCIIActive();
+
+					if (data == null) {
+						return null;
+					}
+
+					Files.write(path, data.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+				} else {
+					String data = this.dataChannel.readASCIIPassive();
+					if (data == null) {
+						return null;
+					}
+
+					Files.write(path, data.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+				}
+			} else {
+				if (this.store.getActiveAdr() != null) {
+					byte[] data = this.dataChannel.readImageActive();
+					if (data == null) {
+						return null;
+					}
+
+					Files.write(path, data, StandardOpenOption.TRUNCATE_EXISTING);
+				} else {
+					byte[] data = this.dataChannel.readImagePassive();
+					if (data == null) {
+						return null;
+					}
+
+					Files.write(path, data, StandardOpenOption.TRUNCATE_EXISTING);
+				}
+			}
+
+			return new FtpReply(2, 2, 6, "Transfer complete");
 		} catch (SecurityException ex) {
 			return new FtpReply(5, 5, 0, "Permission denied");
 		} catch (InvalidPathException ex) {

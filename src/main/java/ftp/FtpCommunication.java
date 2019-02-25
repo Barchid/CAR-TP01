@@ -60,6 +60,9 @@ public class FtpCommunication implements Runnable {
 					continue;
 				}
 				FtpReply reply = this.executeCommand(command);
+				if (reply == null) {
+					continue;
+				}
 				controlChannel.sendReply(reply);
 
 				if (command.getMessage().equals("QUIT")) { // quit command finishes the loop
