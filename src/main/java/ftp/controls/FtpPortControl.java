@@ -1,10 +1,8 @@
 package ftp.controls;
 
-import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
 import java.net.UnknownHostException;
 
 import ftp.FtpCommand;
@@ -43,7 +41,7 @@ public class FtpPortControl extends FtpControl {
 		InetSocketAddress adr = this.extractClientIp(portArgs);
 
 		if (adr == null) {
-			return new FtpReply(5, 0, 0, "NON");
+			return new FtpReply(5, 0, 1, "Syntax error : port number not valid.");
 		}
 
 		this.store.setActiveAdr(adr);
