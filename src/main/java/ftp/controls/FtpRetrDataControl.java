@@ -12,13 +12,15 @@ import ftp.SessionStore;
 
 /**
  * @author Sami BARCHID
+ * 
+ *         Control class used to handle the FTP command "RETR".
  *
  */
 public class FtpRetrDataControl extends FtpDataControl {
 
 	/**
-	 * @param store
-	 * @param dataChannel
+	 * @param store       the store of the client's connection
+	 * @param dataChannel the service that can manage the data channel.
 	 */
 	public FtpRetrDataControl(SessionStore store, FtpDataChannel dataChannel) {
 		super(store, dataChannel);

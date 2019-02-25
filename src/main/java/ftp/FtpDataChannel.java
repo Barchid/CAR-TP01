@@ -22,10 +22,6 @@ public class FtpDataChannel {
 	private SessionStore store;
 	private FtpControlChannel controlChannel;
 
-	/**
-	 * @param store
-	 * @param controlChannel
-	 */
 	public FtpDataChannel(SessionStore store, FtpControlChannel controlChannel) {
 		super();
 		this.store = store;
@@ -83,7 +79,7 @@ public class FtpDataChannel {
 	 * objects.
 	 * 
 	 * @param data the data to send to the server.
-	 * @throws IOException
+	 * @throws IOException if a network error occured.
 	 */
 	public void sendImageActive(byte[] data) throws IOException {
 		try (Socket socket = new Socket(this.store.getActiveAdr().getAddress(), this.store.getActiveAdr().getPort())) {

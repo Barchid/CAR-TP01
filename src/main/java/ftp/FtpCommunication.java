@@ -24,9 +24,6 @@ public class FtpCommunication implements Runnable {
 	private Map<String, FtpControl> controls;
 	private AppConfig appConfig;
 
-	/**
-	 * @param client
-	 */
 	public FtpCommunication(Socket client, AppConfig appConfig) {
 		super();
 		this.client = client;
@@ -121,7 +118,7 @@ public class FtpCommunication implements Runnable {
 	 * 
 	 * @param controlChannel the control channel that will be used to send the
 	 *                       welcome message
-	 * @throws IOException
+	 * @throws IOException if a network error occured.
 	 */
 	private void sendWelcomeMessage(FtpControlChannel controlChannel) throws IOException {
 		String welcome = "Wesh alors !";

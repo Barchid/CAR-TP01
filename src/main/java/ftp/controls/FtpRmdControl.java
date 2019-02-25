@@ -12,13 +12,14 @@ import ftp.FtpReply;
 import ftp.SessionStore;
 
 /**
- * @author Sami BARCHID FTP control class used to manage the FTP command "RMD
- *         <directory>"
+ * @author Sami BARCHID
+ * 
+ *         FTP control class used to manage the FTP command "RMD directory"
  */
 public class FtpRmdControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpRmdControl(SessionStore store) {
 		super(store);

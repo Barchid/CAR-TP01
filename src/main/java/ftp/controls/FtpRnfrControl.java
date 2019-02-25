@@ -1,6 +1,5 @@
 package ftp.controls;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -12,12 +11,14 @@ import ftp.FtpReply;
 import ftp.SessionStore;
 
 /**
- * @author Sami BARCHID Control class used to manage a RNFR FTP command.
+ * @author Sami BARCHID
+ * 
+ *         Control class used to manage a RNFR FTP command.
  */
 public class FtpRnfrControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store store of the client communication
 	 */
 	public FtpRnfrControl(SessionStore store) {
 		super(store);

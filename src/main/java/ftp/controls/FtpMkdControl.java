@@ -12,13 +12,14 @@ import ftp.FtpReply;
 import ftp.SessionStore;
 
 /**
- * @author Sami BARCHID Controller used for the FTP command "MKD [directory
- *         path]"
+ * @author Sami BARCHID
+ * 
+ *         Controller used for the FTP command "MKD [directory path]"
  */
 public class FtpMkdControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpMkdControl(SessionStore store) {
 		super(store);

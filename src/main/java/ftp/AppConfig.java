@@ -24,7 +24,7 @@ public class AppConfig {
 	 * in the project racine.
 	 * 
 	 * 
-	 * @throws Exception
+	 * @throws Exception if the config.properties file cannot be read.
 	 */
 	public AppConfig() throws Exception {
 		System.out.println("Loading the properties file...");
@@ -73,23 +73,14 @@ public class AppConfig {
 		}
 	}
 
-	/**
-	 * @return the portNumber
-	 */
 	public int getPortNumber() {
 		return portNumber;
 	}
 
-	/**
-	 * @return the userDirectories
-	 */
 	public Map<String, String> getUserDirectories() {
 		return userDirectories;
 	}
 
-	/**
-	 * @return the userPassword
-	 */
 	public Map<String, String> getUserPassword() {
 		return userPassword;
 	}

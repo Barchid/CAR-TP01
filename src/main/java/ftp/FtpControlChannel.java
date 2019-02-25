@@ -13,10 +13,6 @@ public class FtpControlChannel {
 	private BufferedWriter writer;
 	private BufferedReader reader;
 
-	/**
-	 * @param writer
-	 * @param reader
-	 */
 	public FtpControlChannel(BufferedWriter writer, BufferedReader reader) {
 		super();
 		this.writer = writer;
@@ -64,16 +60,10 @@ public class FtpControlChannel {
 		}
 	}
 
-	/**
-	 * @return the writer
-	 */
 	public BufferedWriter getWriter() {
 		return writer;
 	}
 
-	/**
-	 * @return the reader
-	 */
 	public BufferedReader getReader() {
 		return reader;
 	}

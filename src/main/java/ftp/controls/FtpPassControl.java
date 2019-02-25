@@ -7,11 +7,12 @@ import ftp.SessionStore;
 /**
  * @author Sami BARCHID
  *
+ *         FTP control used to manage the FTP command "PASS"
  */
 public class FtpPassControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpPassControl(SessionStore store) {
 		super(store);

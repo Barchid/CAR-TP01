@@ -17,12 +17,14 @@ import ftp.SessionStore;
 /**
  * @author Sami BARCHID
  *
+ *         Control class used to handle the command "LIST"
  */
 public class FtpListDataControl extends FtpDataControl {
 
 	/**
-	 * @param store
-	 * @param dataChannel
+	 * @param store       the store of the client's connection
+	 * @param dataChannel the data channel service to handle the data connection
+	 *                    with the client.
 	 */
 	public FtpListDataControl(SessionStore store, FtpDataChannel dataChannel) {
 		super(store, dataChannel);
@@ -66,7 +68,7 @@ public class FtpListDataControl extends FtpDataControl {
 	 * the client.
 	 * 
 	 * @return the formatted list of files in the current directory.
-	 * @throws IOException 
+	 * @throws IOException if a file system error occured.
 	 */
 	private String listDirectory() throws IOException {
 		Path dirPath = Paths.get(this.store.getCurrentDirectory());

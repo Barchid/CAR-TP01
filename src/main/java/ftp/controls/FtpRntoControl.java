@@ -11,13 +11,14 @@ import ftp.FtpReply;
 import ftp.SessionStore;
 
 /**
- * @author Sami BARCHID Ftp control class used to manage the FTP control command
- *         "RNTO"
+ * @author Sami BARCHID
+ * 
+ *         Ftp control class used to manage the FTP control command "RNTO"
  */
 public class FtpRntoControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store store of the client communication
 	 */
 	public FtpRntoControl(SessionStore store) {
 		super(store);

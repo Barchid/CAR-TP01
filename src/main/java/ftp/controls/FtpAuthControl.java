@@ -14,7 +14,7 @@ import ftp.SessionStore;
 public class FtpAuthControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpAuthControl(SessionStore store) {
 		super(store);

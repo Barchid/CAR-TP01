@@ -11,12 +11,14 @@ import ftp.FtpReply;
 import ftp.SessionStore;
 
 /**
- * @author Sami BARCHID FTP control class used to manage the DELE FTP command.
+ * @author Sami BARCHID
+ * 
+ *         FTP control class used to manage the DELE FTP command.
  */
 public class FtpDeleControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpDeleControl(SessionStore store) {
 		super(store);

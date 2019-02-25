@@ -7,11 +7,12 @@ import ftp.SessionStore;
 /**
  * @author Sami BARCHID
  *
+ *         Control class used to manage the FTP commands unknown by the server.
  */
 public class FtpUnknownControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store
 	 */
 	public FtpUnknownControl(SessionStore store) {
 		super(store);

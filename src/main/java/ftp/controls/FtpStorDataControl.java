@@ -13,15 +13,16 @@ import ftp.FtpReply;
 import ftp.SessionStore;
 
 /**
- * @author Sami BARCHID FTP control class used to manage the FTP command "STOR
- *         <filename>"
+ * @author Sami BARCHID
+ * 
+ *         FTP control class used to manage the FTP command "STOR filename"
  *
  */
 public class FtpStorDataControl extends FtpDataControl {
 
 	/**
-	 * @param store
-	 * @param dataChannel
+	 * @param store       store of the client communication
+	 * @param dataChannel the data channel handler
 	 */
 	public FtpStorDataControl(SessionStore store, FtpDataChannel dataChannel) {
 		super(store, dataChannel);

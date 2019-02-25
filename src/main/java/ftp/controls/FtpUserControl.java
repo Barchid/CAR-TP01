@@ -6,12 +6,16 @@ import ftp.SessionStore;
 
 /**
  * @author Sami BARCHID
+ * 
+ *         Control class used to manage the FTP command "USER".
  *
  */
 public class FtpUserControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * The store of the client communication
+	 * 
+	 * @param store the store of the client's connection
 	 */
 	public FtpUserControl(SessionStore store) {
 		super(store);

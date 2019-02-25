@@ -7,10 +7,11 @@ import ftp.SessionStore;
 /**
  * @author Sami BARCHID
  *
+ *         Control class used to manage the FTP command "TYPE".
  */
 public class FtpTypeControl extends FtpControl {
 	/**
-	 * @param store
+	 * @param store store of the client communication
 	 */
 	public FtpTypeControl(SessionStore store) {
 		super(store);

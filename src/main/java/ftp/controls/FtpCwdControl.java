@@ -1,7 +1,6 @@
 package ftp.controls;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
@@ -14,11 +13,12 @@ import ftp.SessionStore;
 /**
  * @author Sami BARCHID
  *
+ *         Control class used to manage the FTP command "CWD"
  */
 public class FtpCwdControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpCwdControl(SessionStore store) {
 		super(store);

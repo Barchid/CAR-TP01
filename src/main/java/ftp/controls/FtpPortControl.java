@@ -12,11 +12,12 @@ import ftp.SessionStore;
 /**
  * @author Sami BARCHID
  *
+ *         Control class used to manage the FTP command "PORT"
  */
 public class FtpPortControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpPortControl(SessionStore store) {
 		super(store);
@@ -94,7 +95,7 @@ public class FtpPortControl extends FtpControl {
 	 * @param port the port to check for availability
 	 * @return true if the port is valid and available or else false
 	 */
-	public boolean isPortValidAndAvailable(int port) {
+	private boolean isPortValidAndAvailable(int port) {
 		if (port < 1024 || port > 65535) {
 			System.out.println("Port is out of range.");
 			return false;

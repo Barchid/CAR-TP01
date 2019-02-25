@@ -1,20 +1,18 @@
 package ftp.controls;
 
-import java.io.IOException;
-
 import ftp.FtpCommand;
-import ftp.FtpControlChannel;
 import ftp.FtpReply;
 import ftp.SessionStore;
 
 /**
  * @author Sami BARCHID
  *
+ *         Control class used to manage the FTP command "SYST".
  */
 public class FtpSystControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client communication
 	 */
 	public FtpSystControl(SessionStore store) {
 		super(store);

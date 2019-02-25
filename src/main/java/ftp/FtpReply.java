@@ -18,7 +18,7 @@ public class FtpReply {
 	 * @param firstDigit  the first digit of the code
 	 * @param secondDigit the second digit of the code
 	 * @param thirdDigit  the third digit of the code
-	 * @param message
+	 * @param message     the additionnal message of the reply.
 	 */
 	public FtpReply(int firstDigit, int secondDigit, int thirdDigit, String message) {
 		super();
@@ -26,9 +26,6 @@ public class FtpReply {
 		this.message = message;
 	}
 
-	/**
-	 * @return the code
-	 */
 	public String getCode() {
 		return code;
 	}
@@ -43,16 +40,10 @@ public class FtpReply {
 		this.code = firstDigit + "" + secondDigit + "" + thirdDigit;
 	}
 
-	/**
-	 * @return the message
-	 */
 	public String getMessage() {
 		return message;
 	}
 
-	/**
-	 * @param message the message to set
-	 */
 	public void setMessage(String message) {
 		this.message = message;
 	}

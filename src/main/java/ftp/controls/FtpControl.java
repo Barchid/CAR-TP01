@@ -17,7 +17,7 @@ public abstract class FtpControl {
 	protected SessionStore store;
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpControl(SessionStore store) {
 		super();
@@ -30,7 +30,8 @@ public abstract class FtpControl {
 	 * 
 	 * @param command the command to handle
 	 * @return FtpReply the adequate reply.
-	 * @throws IOException
+	 * @throws IOException if a network error occured with the client's control
+	 *                     connection.
 	 */
 	public abstract FtpReply handle(FtpCommand command) throws IOException;
 }

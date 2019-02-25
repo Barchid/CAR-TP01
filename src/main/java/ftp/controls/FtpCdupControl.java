@@ -17,7 +17,7 @@ import ftp.SessionStore;
 public class FtpCdupControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpCdupControl(SessionStore store) {
 		super(store);

@@ -24,11 +24,6 @@ public class SessionStore {
 	private String currentDirectory;
 	private String renameFrom;
 
-	/**
-	 * @param loggedIn
-	 * @param username
-	 * @param password
-	 */
 	public SessionStore(boolean loggedIn, String username, String password) {
 		super();
 		this.loggedIn = loggedIn;
@@ -50,51 +45,30 @@ public class SessionStore {
 		this(false, "", "");
 	}
 
-	/**
-	 * @return the loggedIn
-	 */
 	public boolean isLoggedIn() {
 		return loggedIn;
 	}
 
-	/**
-	 * @param loggedIn the loggedIn to set
-	 */
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
 
-	/**
-	 * @return the username
-	 */
 	public String getUsername() {
 		return username;
 	}
 
-	/**
-	 * @param username the username to set
-	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	/**
-	 * @return the password
-	 */
 	public String getPassword() {
 		return password;
 	}
 
-	/**
-	 * @param password the password to set
-	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	/**
-	 * @return the activeAdr
-	 */
 	public InetSocketAddress getActiveAdr() {
 		return activeAdr;
 	}
@@ -106,30 +80,18 @@ public class SessionStore {
 		this.activeAdr = activeAdr;
 	}
 
-	/**
-	 * @return the passivePort
-	 */
 	public int getPassivePort() {
 		return passivePort;
 	}
 
-	/**
-	 * @param passivePort the passivePort to set
-	 */
 	public void setPassivePort(int passivePort) {
 		this.passivePort = passivePort;
 	}
 
-	/**
-	 * @return the transferType
-	 */
 	public int getTransferType() {
 		return transferType;
 	}
 
-	/**
-	 * @param transferType the transferType to set
-	 */
 	public void setTransferType(int transferType) {
 		if (transferType != TYPE_ASCII && transferType != TYPE_IMAGE) {
 			return;
@@ -138,58 +100,34 @@ public class SessionStore {
 		this.transferType = transferType;
 	}
 
-	/**
-	 * @return the rootDirectory
-	 */
 	public String getRootDirectory() {
 		return rootDirectory;
 	}
 
-	/**
-	 * @param rootDirectory the rootDirectory to set
-	 */
 	public void setRootDirectory(String rootDirectory) {
 		this.rootDirectory = rootDirectory;
 	}
 
-	/**
-	 * @return the currentDirectory
-	 */
 	public String getCurrentDirectory() {
 		return currentDirectory;
 	}
 
-	/**
-	 * @param currentDirectory the currentDirectory to set
-	 */
 	public void setCurrentDirectory(String currentDirectory) {
 		this.currentDirectory = currentDirectory;
 	}
 
-	/**
-	 * @return the appConfig
-	 */
 	public AppConfig getAppConfig() {
 		return appConfig;
 	}
 
-	/**
-	 * @param appConfig the appConfig to set
-	 */
 	public void setAppConfig(AppConfig appConfig) {
 		this.appConfig = appConfig;
 	}
 
-	/**
-	 * @return the renameFrom
-	 */
 	public String getRenameFrom() {
 		return renameFrom;
 	}
 
-	/**
-	 * @param renameFrom the renameFrom to set
-	 */
 	public void setRenameFrom(String renameFrom) {
 		this.renameFrom = renameFrom;
 	}

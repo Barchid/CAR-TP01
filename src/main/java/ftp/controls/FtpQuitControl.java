@@ -6,12 +6,14 @@ import ftp.SessionStore;
 
 /**
  * @author Sami BARCHID
+ * 
+ *         Control class used to manage the FTP command "QUIT".
  *
  */
 public class FtpQuitControl extends FtpControl {
 
 	/**
-	 * @param store
+	 * @param store the store of the client's connection
 	 */
 	public FtpQuitControl(SessionStore store) {
 		super(store);
