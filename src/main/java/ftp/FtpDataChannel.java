@@ -1,7 +1,6 @@
 package ftp;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -34,7 +33,7 @@ public class FtpDataChannel {
 	public void sendASCIIActive(String data) throws IOException {
 		this.sendOpeningReply();
 		try (Socket socket = new Socket(this.store.getActiveAdr().getAddress(), this.store.getActiveAdr().getPort());) {
-			System.out.println("Writing ASCII data through data channel.");
+			System.out.println("Writing ASCII data through data channel with ASCII active mode.");
 //			this.writeASCIIData(data, socket);
 			this.writeImageData(data.getBytes(), socket);
 		} catch (IOException exception) {
@@ -50,9 +49,10 @@ public class FtpDataChannel {
 			Socket socket = serverSocket.accept();
 			this.sendOpeningReply();
 
-			System.out.println("Writing data through data channel.");
-//			this.writeASCIIData(data, socket);
-			this.writeImageData(data.getBytes(), socket);
+			System.out.println("Writing data through data channel with ASCII passive mode.");
+			this.writeASCIIData(data, socket);
+			socket.close();
+//			this.writeImageData(data.getBytes(), socket);
 		} catch (SocketTimeoutException e) {
 			System.out.println("Timeout of the socket reached. Send error in the control channel.");
 			this.sendTimeoutReply();
@@ -71,7 +71,7 @@ public class FtpDataChannel {
 	 */
 	public void sendImageActive(byte[] data) throws IOException {
 		try (Socket socket = new Socket(this.store.getActiveAdr().getAddress(), this.store.getActiveAdr().getPort())) {
-			System.out.println("Writing IMAGE data through data channel.");
+			System.out.println("Writing IMAGE data through data channel with Image active mode.");
 			this.writeImageData(data, socket);
 
 			this.sendOpeningReply();
@@ -87,9 +87,9 @@ public class FtpDataChannel {
 			System.out.println("Waiting for client passive data channel...");
 			Socket socket = serverSocket.accept();
 
-			System.out.println("Writing data through data channel.");
+			System.out.println("Writing data through data channel with Image passive mode.");
 			this.writeImageData(data, socket);
-
+			socket.close();
 			this.sendOpeningReply();
 		} catch (SocketTimeoutException e) {
 			System.out.println("Timeout of the socket reached. Send error in the control channel.");
@@ -103,8 +103,9 @@ public class FtpDataChannel {
 	public String readASCIIActive() throws IOException {
 		try (Socket socket = new Socket(this.store.getActiveAdr().getAddress(), this.store.getActiveAdr().getPort());) {
 			this.sendOpeningReply();
-			System.out.println("Receiving ASCII data through data channel.");
+			System.out.println("Receiving ASCII data through data channel with ASCII active mode.");
 			String data = this.readASCIIData(socket);
+			System.out.println(data);
 			return data;
 		} catch (IOException exception) {
 			System.err.println("Could not open connection data. Send error to the control channel.");
@@ -120,9 +121,10 @@ public class FtpDataChannel {
 			Socket socket = serverSocket.accept();
 			this.sendOpeningReply();
 
-			System.out.println("Reading data through data channel.");
+			System.out.println("Reading data through data channel with ASII passive mode.");
 			String data = this.readASCIIData(socket);
 			System.out.println("ASCII data received.");
+			socket.close();
 			return data;
 		} catch (SocketTimeoutException e) {
 			System.out.println("Timeout of the socket reached. Send error in the control channel.");
@@ -159,6 +161,7 @@ public class FtpDataChannel {
 			System.out.println("Reading data through data channel.");
 			byte[] data = this.readImageData(socket);
 			System.out.println("ASCII data received.");
+			socket.close();
 			return data;
 		} catch (SocketTimeoutException e) {
 			System.out.println("Timeout of the socket reached. Send error in the control channel.");

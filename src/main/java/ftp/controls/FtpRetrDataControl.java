@@ -35,6 +35,11 @@ public class FtpRetrDataControl extends FtpDataControl {
 			return new FtpReply(5, 3, 0, "Please log in with USER and PASS first.");
 		}
 
+		// if there is no information about a port or passive mode
+		if (this.store.getPassivePort() == -1 && this.store.getActiveAdr() == null) {
+			return new FtpReply(5, 0, 3, "Bad sequence of commands.");
+		}
+
 		String fileName = command.getArg();
 		if (fileName == null) {
 			return new FtpReply(5, 0, 1, "Syntax error");

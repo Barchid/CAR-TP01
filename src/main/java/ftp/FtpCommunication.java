@@ -73,6 +73,7 @@ public class FtpCommunication implements Runnable {
 			// closing the client.
 			this.client.close();
 		} catch (IOException ex) {
+			ex.printStackTrace();
 			System.out.println(ex.getMessage());
 			System.out.println("Error while receiving command/sending reply. Connection abort.");
 		} catch (Exception ex) {
@@ -114,7 +115,7 @@ public class FtpCommunication implements Runnable {
 	}
 
 	private void sendWelcomeMessage(FtpControlChannel controlChannel) throws IOException {
-		String welcome = "WESH ALORS !";
+		String welcome = "Wesh alors !";
 		controlChannel.sendReply(new FtpReply(2, 2, 0, welcome));
 	}
 }

@@ -71,14 +71,14 @@ public class FtpStorDataControl extends FtpDataControl {
 						return null;
 					}
 
-					Files.write(path, data.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+					Files.write(path, data.getBytes(), StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
 				} else {
 					String data = this.dataChannel.readASCIIPassive();
 					if (data == null) {
 						return null;
 					}
 
-					Files.write(path, data.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+					Files.write(path, data.getBytes(), StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
 				}
 			} else {
 				if (this.store.getActiveAdr() != null) {
@@ -87,14 +87,14 @@ public class FtpStorDataControl extends FtpDataControl {
 						return null;
 					}
 
-					Files.write(path, data, StandardOpenOption.TRUNCATE_EXISTING);
+					Files.write(path, data, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
 				} else {
 					byte[] data = this.dataChannel.readImagePassive();
 					if (data == null) {
 						return null;
 					}
 
-					Files.write(path, data, StandardOpenOption.TRUNCATE_EXISTING);
+					Files.write(path, data, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
 				}
 			}
 

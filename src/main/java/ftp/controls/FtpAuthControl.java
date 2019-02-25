@@ -1,9 +1,6 @@
 package ftp.controls;
 
-import java.io.IOException;
-
 import ftp.FtpCommand;
-import ftp.FtpControlChannel;
 import ftp.FtpReply;
 import ftp.SessionStore;
 

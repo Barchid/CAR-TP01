@@ -91,4 +91,12 @@ public class AppConfig {
 	public Map<String, String> getUserPassword() {
 		return userPassword;
 	}
+
+	public void setUserDirectories(Map<String, String> userDirectories) {
+		this.userDirectories = userDirectories;
+	}
+
+	public void setUserPassword(Map<String, String> userPassword) {
+		this.userPassword = userPassword;
+	}
 }

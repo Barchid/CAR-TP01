@@ -2,7 +2,9 @@ package ftp;
 
 import static org.junit.Assert.*;
 
-import org.junit.BeforeClass;
+import java.io.IOException;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import ftp.controls.FtpAuthControl;
@@ -12,22 +14,27 @@ import ftp.controls.FtpAuthControl;
  *
  */
 public class FtpAuthControlTest extends FtpTest {
-	private FtpAuthControl control;
+	public FtpAuthControlTest() throws Exception {
+		super();
+	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	@Before
+	public void setUp() throws Exception {
+		this.control = new FtpAuthControl(store);
 	}
 
 	/**
-	 * Test method for {@link ftp.controls.FtpAuthControl#handle(ftp.FtpCommand)}.
+	 * Test the only possible case in the handle method of AUTH FTP control.
+	 * @throws IOException 
 	 */
 	@Test
-	public void testHandle() {
-
-		fail("Not yet implemented");
+	public void testHandle() throws IOException {
+		FtpReply reply = this.executeCommand("AUTH", "blabla");
+		assertEquals("502", reply.getCode());
+		assertEquals("Explicit TLS authentication not allowed", reply.getMessage());
 	}
 
 }

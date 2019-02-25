@@ -2,12 +2,12 @@ package ftp.controls;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.regex.Pattern;
-
-import org.unix4j.Unix4j;
-import org.unix4j.unix.Ls;
 
 import ftp.FtpCommand;
 import ftp.FtpDataChannel;
@@ -66,12 +66,14 @@ public class FtpListDataControl extends FtpDataControl {
 	 * the client.
 	 * 
 	 * @return the formatted list of files in the current directory.
+	 * @throws IOException 
 	 */
-	private String listDirectory() {
-		File dir = new File(this.store.getCurrentDirectory());
+	private String listDirectory() throws IOException {
+		Path dirPath = Paths.get(this.store.getCurrentDirectory());
 		StringBuilder sb = new StringBuilder();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy", Locale.ENGLISH);
-		for (File son : dir.listFiles()) {
+		Files.list(dirPath).forEach(path -> {
+			File son = new File(path.toAbsolutePath().toString());
 			if (son.isDirectory()) {
 				sb.append("d");
 			} else {
@@ -95,7 +97,7 @@ public class FtpListDataControl extends FtpDataControl {
 			sb.append(" ");
 			sb.append(son.getName());
 			sb.append("\r\n");
-		}
+		});
 		System.out.println(sb.toString());
 		return sb.toString();
 	}
