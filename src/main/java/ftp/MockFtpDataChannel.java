@@ -2,6 +2,10 @@ package ftp;
 
 import java.io.IOException;
 
+import ftp.FtpControlChannel;
+import ftp.FtpDataChannel;
+import ftp.SessionStore;
+
 /**
  * Mock class used to test the control classes that manages the FTP commands.
  * 

@@ -25,7 +25,7 @@ public class FtpControlChannel {
 	 * Sends an FTP reply to the client through the control channel.
 	 * 
 	 * @param reply the FTP reply to send
-	 * @throws IOException
+	 * @throws IOException when a network error on write through socket occured.
 	 */
 	public void sendReply(FtpReply reply) throws IOException {
 		System.out.println("> " + reply.getCode() + " " + reply.getMessage());
@@ -33,6 +33,13 @@ public class FtpControlChannel {
 		this.writer.flush();
 	}
 
+	/**
+	 * Reads a command of the FTP client through the control socket connection.
+	 * 
+	 * @return an instance of the FTP command based on the message sent by the FTP
+	 *         client.
+	 * @throws IOException if a network error on read through socket occurred.
+	 */
 	public FtpCommand readCommand() throws IOException {
 		String line = this.reader.readLine();
 		if (line == null) {

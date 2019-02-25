@@ -13,8 +13,9 @@ import ftp.controls.FtpControl;
 import ftp.controls.FtpControlFactory;
 
 /**
- * @author Sami BARCHID
- *
+ * @author Sami BARCHID Represents the communication session with an FTP client.
+ *         This is basically the thread that will be executed when the server
+ *         receives a new client socket.
  */
 public class FtpCommunication implements Runnable {
 	private Socket client;
@@ -73,11 +74,9 @@ public class FtpCommunication implements Runnable {
 			// closing the client.
 			this.client.close();
 		} catch (IOException ex) {
-			ex.printStackTrace();
 			System.out.println(ex.getMessage());
 			System.out.println("Error while receiving command/sending reply. Connection abort.");
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			System.out.println(ex.getMessage());
 			System.out.println("Unknown error. Connection abort.");
 		}
@@ -114,6 +113,14 @@ public class FtpCommunication implements Runnable {
 		}
 	}
 
+	/**
+	 * Sends the welcome message to the FTP client when it first connects with its
+	 * socket.
+	 * 
+	 * @param controlChannel the control channel that will be used to send the
+	 *                       welcome message
+	 * @throws IOException
+	 */
 	private void sendWelcomeMessage(FtpControlChannel controlChannel) throws IOException {
 		String welcome = "Wesh alors !";
 		controlChannel.sendReply(new FtpReply(2, 2, 0, welcome));

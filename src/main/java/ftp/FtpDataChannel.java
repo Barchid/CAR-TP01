@@ -30,6 +30,13 @@ public class FtpDataChannel {
 		this.controlChannel = controlChannel;
 	}
 
+	/**
+	 * Sends the ascii data through a new data channel with active FTP mode for
+	 * transfer.
+	 * 
+	 * @param data the ASCII data to send.
+	 * @throws IOException if a network error occured on write through socket
+	 */
 	public void sendASCIIActive(String data) throws IOException {
 		this.sendOpeningReply();
 		try (Socket socket = new Socket(this.store.getActiveAdr().getAddress(), this.store.getActiveAdr().getPort());) {
@@ -42,6 +49,13 @@ public class FtpDataChannel {
 		}
 	}
 
+	/**
+	 * Sends the ASCII data through a new data channel with passive FTP mode for
+	 * transfer.
+	 * 
+	 * @param data the ASCII data to send.
+	 * @throws IOException if a network error occured on write through socket.
+	 */
 	public void sendASCIIPassive(String data) throws IOException {
 		try (ServerSocket serverSocket = new ServerSocket(this.store.getPassivePort())) {
 			serverSocket.setSoTimeout(10000); // set the timeout to 10 seconds.
@@ -81,6 +95,12 @@ public class FtpDataChannel {
 		}
 	}
 
+	/**
+	 * Sends the image data through a new data channel with the passive FTP mode.
+	 * 
+	 * @param data the image data to send.
+	 * @throws IOException if a network error occured when using the socket.
+	 */
 	public void sendImagePassive(byte[] data) throws IOException {
 		try (ServerSocket serverSocket = new ServerSocket(this.store.getPassivePort())) {
 			serverSocket.setSoTimeout(10000); // set the timeout to 10 seconds.
@@ -100,6 +120,12 @@ public class FtpDataChannel {
 		}
 	}
 
+	/**
+	 * Reads the ASCII data through a new data channel with active mode.
+	 * 
+	 * @return the ASCII data sent by the FTP client.
+	 * @throws IOException if a network error occured.
+	 */
 	public String readASCIIActive() throws IOException {
 		try (Socket socket = new Socket(this.store.getActiveAdr().getAddress(), this.store.getActiveAdr().getPort());) {
 			this.sendOpeningReply();
@@ -114,6 +140,12 @@ public class FtpDataChannel {
 		}
 	}
 
+	/**
+	 * Reads the ASCII data through a new data channel with passive mode.
+	 * 
+	 * @return the data sent by the FTP client.
+	 * @throws IOException if a network error occured.
+	 */
 	public String readASCIIPassive() throws IOException {
 		try (ServerSocket serverSocket = new ServerSocket(this.store.getPassivePort())) {
 			serverSocket.setSoTimeout(10000); // set the timeout to 10 seconds.
@@ -137,6 +169,12 @@ public class FtpDataChannel {
 		}
 	}
 
+	/**
+	 * Reads the image data through a new data channel with active mode.
+	 * 
+	 * @return the image data sent by the client
+	 * @throws IOException if a network error occured.
+	 */
 	public byte[] readImageActive() throws IOException {
 		try (Socket socket = new Socket(this.store.getActiveAdr().getAddress(), this.store.getActiveAdr().getPort());) {
 			this.sendOpeningReply();
@@ -151,6 +189,12 @@ public class FtpDataChannel {
 		}
 	}
 
+	/**
+	 * Reads the image data through a new data channel with passive mode
+	 * 
+	 * @return the image data sent by the FTP client.
+	 * @throws IOException if a network error occured.
+	 */
 	public byte[] readImagePassive() throws IOException {
 		try (ServerSocket serverSocket = new ServerSocket(this.store.getPassivePort())) {
 			serverSocket.setSoTimeout(10000); // set the timeout to 10 seconds.
@@ -204,10 +248,12 @@ public class FtpDataChannel {
 	}
 
 	/**
+	 * Reads the ASCII data sent by the FTP client.
 	 * 
-	 * @param socket
-	 * @return
-	 * @throws IOException
+	 * @param socket the socket representing the connection between the server and
+	 *               the FTP client
+	 * @return the ASCII data sent by the FTP client
+	 * @throws IOException if a network error occured.
 	 */
 	private String readASCIIData(Socket socket) throws IOException {
 		try (BufferedReader dataIn = new BufferedReader(
@@ -221,10 +267,12 @@ public class FtpDataChannel {
 	}
 
 	/**
+	 * Reads the Image data sent by the FTP client.
 	 * 
-	 * @param socket
-	 * @return
-	 * @throws IOException
+	 * @param socket the socket representing the connection between the server and
+	 *               the FTP client
+	 * @return the Image data sent by the FTP client
+	 * @throws IOException if a network error occured.
 	 */
 	private byte[] readImageData(Socket socket) throws IOException {
 		try (BufferedInputStream dataIn = new BufferedInputStream(socket.getInputStream())) {

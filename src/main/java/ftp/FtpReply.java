@@ -2,7 +2,7 @@ package ftp;
 
 /**
  * @author Sami BARCHID
- *
+ * Represents an FTP reply sent by the server when 
  */
 public class FtpReply {
 	private String code;

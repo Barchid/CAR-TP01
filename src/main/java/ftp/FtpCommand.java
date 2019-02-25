@@ -3,7 +3,9 @@ package ftp;
 /**
  * @author Sami BARCHID
  * 
- *         Represents an FTP client's command sent in the control connection.
+ *         Represents an FTP client's command sent in the control connection. A
+ *         command is composed of a message and the option argument suuch as :
+ *         "USER <username>"
  */
 public class FtpCommand {
 	private String message;

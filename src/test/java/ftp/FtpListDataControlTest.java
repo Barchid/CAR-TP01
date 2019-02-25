@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ftp.controls.FtpListDataControl;
-import ftp.controls.FtpStorDataControl;
+import ftp.MockFtpDataChannel;
 
 public class FtpListDataControlTest extends FtpTest {
 
